@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Insert Content</title>
+</head>
+<body>
+<p>文本框：</p>
+<textarea name="" id="textarea" cols="30" rows="10">
+sASASADASDasfaDFDsfsDFAfdFADf
+</textarea>
+<button type="button" id="setSelectText">选中特定范围的文本</button>
+<button type="button" id="insertAfterText">在光标后插入文本</button>
+<br>
+<hr>
+<br>
+<input type="number" name="" id="input">
+<button type="button" id="setCurPosBtn">设置光标位置</button>
+<br>
+<hr>
+<br>
+<p id="selectText">我是一段可以选中的文字，请打开控制台查看。我是一段可以选中的文字，请打开控制台查看。我是一段可以选中的文字，请打开控制台查看。</p>
+
+<script src="selectRange.js"></script>
+<script>
+
+var textareaDom = document.querySelector("#textarea"),
+    setCurPosInput = document.querySelector("#input"),
+    setCurPosBtn = document.querySelector("#setCurPosBtn"),
+    selectText = document.querySelector("#selectText"),
+    setSelectTextBtn = document.querySelector("#setSelectText"),
+    insertAfterTextBtn = document.querySelector("#insertAfterText");
+// 获取当前光标位置
+textareaDom.addEventListener("keydown", function() {
+    console.log("getCurPos: " + selectRange.of(textareaDom).getCurPos());
+}, false);
+
+// 设置当前光标位置
+setCurPosBtn.addEventListener("click", function() {
+    var curPos = parseInt(setCurPosInput.value);
+    console.log("curPos: " + curPos);
+    selectRange.of(textareaDom).setCurPos(curPos);
+}, false);
+
+// 获取选中文字
+selectText.addEventListener("mouseup", function() {
+    console.log("selectText: " + selectRange.of(this).getSelectText());
+});
+
+// 选中特定范围的文本
+setSelectTextBtn.addEventListener("click", function() {
+    selectRange.of(textareaDom).setSelectText(0, 21);
+}, false);
+
+// 在光标后插入文本
+insertAfterTextBtn.addEventListener("click", function() {
+    var insertText = "===hello world, I'm insert content.===";
+    selectRange.of(textareaDom).insertAfterText(insertText);
+}, false);
+</script>
+</body>
+</html>
